@@ -3,19 +3,17 @@ async function tempo(request, response) {
 
     // Randomizando os pokemons
     const pokemonId = Math.floor(Math.random() * 905) + 1;
-
-    const imageUrl = 'https://pokeapi.co/api/v2/pokemon/${pokemonId}/sprites';
-
-    const response = await fetch(imageUrl);
-
-    const imageData = response.blob();
-
-    const imageElement = document.createElement("img");
-    imageElement.src = URL.createObjectURL(imageData);
-    document.body.appendChild(imageElement);
+    console.log(pokemonId);
+    
+    const pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
+    const pokeData = await pokemon.json();
+    const pokeNome = pokeData.name;
 
     response.json({
-        data: dynamicDate.toGMTString()
+        data: dynamicDate.toGMTString(),
+        pokemon: {
+            name: pokeNome
+          }
     })
 }
 
