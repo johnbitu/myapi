@@ -1,9 +1,9 @@
-function tempo(request, response) {
+async function tempo(request, response) {
     const dynamicDate = new Date();
 
 
     response.json({
-        date: dynamicDate.toGMTString()
+        data: dynamicDate.toGMTString()
     })
 }
 
