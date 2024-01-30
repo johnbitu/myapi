@@ -12,6 +12,7 @@ async function tempo(request, response) {
     response.json({
         data: dynamicDate.toGMTString(),
         pokemon: {
+            pokemonId: pokemonId,
             name: pokeNome
           }
     })
