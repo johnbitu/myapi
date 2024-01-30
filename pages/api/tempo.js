@@ -17,9 +17,8 @@ async function tempo(request, response) {
                 pokemonId: pokemonId,
                 name: pokeNome
               }
-        })
-    })
-    
-}
+        });
+    },5000);  
+};
 
 export default tempo;
