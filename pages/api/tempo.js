@@ -9,13 +9,17 @@ async function tempo(request, response) {
     const pokeData = await pokemon.json();
     const pokeNome = pokeData.name;
 
-    response.json({
-        data: dynamicDate.toGMTString(),
-        pokemon: {
-            pokemonId: pokemonId,
-            name: pokeNome
-          }
+
+    setInterval(() => {
+        response.json({
+            data: dynamicDate.toGMTString(),
+            pokemon: {
+                pokemonId: pokemonId,
+                name: pokeNome
+              }
+        })
     })
+    
 }
 
 export default tempo;
