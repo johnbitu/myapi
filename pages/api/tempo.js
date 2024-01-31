@@ -4,21 +4,22 @@ async function tempo(request, response) {
     // Randomizando os pokemons
     const pokemonId = Math.floor(Math.random() * 905) + 1;
     console.log(pokemonId);
-    
+
     const pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
     const pokeData = await pokemon.json();
     const pokeNome = pokeData.name;
 
 
-    setInterval(() => {
-        response.json({
-            data: dynamicDate.toGMTString(),
-            pokemon: {
-                pokemonId: pokemonId,
-                name: pokeNome
-              }
-        });
-    },5000);  
-};
+    response.json({
+        data: dynamicDate.toGMTString(),
+        pokemon: {
+            pokemonId: pokemonId,
+            name: pokeNome
+        }
+    })
+
+    // Atualiza a página automaticamente em 5 segundos
+
+}
 
 export default tempo;
