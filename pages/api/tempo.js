@@ -38,5 +38,7 @@ export default async function tempo(request, response) {
 function atualizarAPI(response) {
     // Faça a chamada à API aqui
     tempo(null, response);
+
+    console.log(response.json)
     console.log('API atualizada!');
 }
