@@ -35,6 +35,7 @@ app.get('/users', (req, res) => {
 app.post('/users', (req, res) => {
   const { name, email } = req.body;
 
+  console.log('Received data:', name, email);
   // if (!name || !email) {
   //   return res.status(400).json({ error: 'Name and email are required' });
   // }

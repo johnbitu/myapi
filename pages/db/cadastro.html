@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Node.js SQLite Example</title>
 </head>
+
 <body>
   <h1>Users</h1>
   <ul id="userList"></ul>
@@ -12,15 +14,15 @@
   <h2>Add User</h2>
   <form action="/users" method="post">
     <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required>
+    <input placeholder="digita teu nome ai btl" type="text" id="name" name="name">
     <br>
     <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
+    <input type="email" id="email" name="email">
     <br>
-    <button type="submit">Add User</button>
+    <button id="btn-envio" type="submit">Add User</button>
   </form>
 
-  <script>
+  <script defer>
     async function fetchUsers() {
       const response = await fetch('/users');
       const data = await response.json();
@@ -35,7 +37,37 @@
       });
     }
 
-    fetchUsers();
+    const envio = async e => {
+      e.preventDefault();
+      const inputName = document.querySelector('#name').value;
+      const inputEmail = document.querySelector('#email').value;
+      try {
+        const response = await fetch('/users', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ name: inputName, email: inputEmail }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`Failed to add user: ${response.status}`);
+        }
+
+        // Atualize a lista de usuários após adicionar um novo
+        fetchUsers();
+      } catch (error) {
+        console.error('Error:', error.message);
+      }
+
+
+    }
+
+    const form = document.querySelector('form');
+
+    form.addEventListener('submit', envio)
+
   </script>
 </body>
+
 </html>
