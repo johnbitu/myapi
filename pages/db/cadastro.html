@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Node.js SQLite Example</title>
+  <style></style>
 </head>
 
 <body>
@@ -19,8 +20,11 @@
     <label for="email">Email:</label>
     <input type="email" id="email" name="email">
     <br>
+    <label for="senha">Senha:</label>
+    <input type="password" id="senha" name="senha">
     <button id="btn-envio" type="submit">Add User</button>
   </form>
+  <a href="/" id="login">Login</a>
 
   <script defer>
     async function fetchUsers() {
@@ -41,13 +45,14 @@
       e.preventDefault();
       const inputName = document.querySelector('#name').value;
       const inputEmail = document.querySelector('#email').value;
+      const inputSenha = document.querySelector('#senha').value;
       try {
         const response = await fetch('/users', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ name: inputName, email: inputEmail }),
+          body: JSON.stringify({ name: inputName, email: inputEmail,senha: inputSenha }),
         });
 
         if (!response.ok) {
